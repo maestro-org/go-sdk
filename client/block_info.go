@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gomaestro-org/go-sdk/utils"
+	"github.com/maestro-org/go-sdk/utils"
 )
 
 type OperationalCertificate struct {

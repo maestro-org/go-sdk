@@ -27,13 +27,13 @@
 ## Installation
 
 ```bash
-go get -u github.com/gomaestro-org/go-sdk
+go get -u github.com/maestro-org/go-sdk
 ```
 
 ## Usage
 
 ```go
-import "github.com/gomaestro-org/go-sdk/client"
+import "github.com/maestro-org/go-sdk/client"
 
 maestroClient := client.NewClient("<PROJECT_API_KEY>", "<NETWORK>")
 ```
@@ -44,7 +44,7 @@ maestroClient := client.NewClient("<PROJECT_API_KEY>", "<NETWORK>")
 ## Example
 
 ```go
-import "github.com/gomaestro-org/go-sdk/client"
+import "github.com/maestro-org/go-sdk/client"
 
 maestroClient := client.NewClient("<PROJECT_API_KEY>", "mainnet")
 

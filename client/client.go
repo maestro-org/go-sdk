@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gomaestro-org/go-sdk/config"
+	"github.com/maestro-org/go-sdk/config"
 )
 
 type Client struct {
