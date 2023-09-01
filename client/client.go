@@ -25,7 +25,7 @@ func NewClient(apiKey string, network string) *Client {
 		network: network,
 		version: cfg.Client.Version,
 		HTTPClient: &http.Client{
-			Timeout: time.Duration(cfg.Client.Timeout),
+			Timeout: 5 * time.Minute,
 		},
 		baseUrl: fmt.Sprintf("https://%s.gomaestro-api.org/%s", network, cfg.Client.Version),
 	}
