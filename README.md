@@ -24,6 +24,35 @@
 
 # Getting Started
 
+## Installation
+
+```bash
+go get -u github.com/gomaestro-org/go-sdk
+```
+
+## Usage
+
+```go
+import "github.com/gomaestro-org/go-sdk/client"
+
+maestroClient := client.NewClient("<PROJECT_API_KEY>", "<NETWORK>")
+```
+
+* To generate an API key, create a free account [here](https://dashboard.gomaestro.org/)!
+* Network options: `preview`, `preprod`, `mainnet`, `sanchonet`
+
+## Example
+
+```go
+import "github.com/gomaestro-org/go-sdk/client"
+
+maestroClient := client.NewClient("<PROJECT_API_KEY>", "mainnet")
+
+blockInfo := maestroClient.BlockInfo(9005859)
+
+fmt.Println(blockInfo)
+```
+
 # Documentation
 
 * [Maestro public docs](https://docs.gomaestro.org/)

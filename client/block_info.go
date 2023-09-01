@@ -44,7 +44,7 @@ type BlockInfo struct {
 	LastUpdated utils.LastUpdated `json:"last_updated"`
 }
 
-func (c *Client) GetBlockInfo(blockHeight int64) (*BlockInfo, error) {
+func (c *Client) BlockInfo(blockHeight int64) (*BlockInfo, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/blocks/%d", c.baseUrl, blockHeight), nil)
 	if err != nil {
 		return nil, err
