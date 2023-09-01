@@ -27,7 +27,7 @@
 ## Installation
 
 ```bash
-go get -u github.com/maestro-org/go-sdk
+go get -u github.com/maestro-org/go-sdk@main
 ```
 
 ## Usage
