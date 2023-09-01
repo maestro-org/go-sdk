@@ -5,8 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"path"
-	"strings"
 	"time"
 
 	"github.com/maestro-org/go-sdk/config"
@@ -22,7 +20,6 @@ type Client struct {
 
 func NewClient(apiKey string, network string) *Client {
 	cfg := config.GetConfig()
-	paths := []string{"https:///", fmt.Sprintf("%s.gomaestro-api.org", strings.ToLower(network)), cfg.Client.Version}
 	return &Client{
 		apiKey:  apiKey,
 		network: network,
@@ -30,7 +27,7 @@ func NewClient(apiKey string, network string) *Client {
 		HTTPClient: &http.Client{
 			Timeout: time.Duration(cfg.Client.Timeout),
 		},
-		baseUrl: path.Join(paths...),
+		baseUrl: fmt.Sprintf("https://%s.gomaestro-api.org/%s", network, cfg.Client.Version),
 	}
 }
 
