@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"time"
 
@@ -36,16 +37,17 @@ type errorResponse struct {
 	Message string `json:"message"`
 }
 
-type successResponse struct {
-	Code int         `json:"code"`
-	Data interface{} `json:"data"`
-}
+// type successResponse struct {
+// 	Code int         `json:"code"`
+// 	Data interface{} `json:"data"`
+// }
 
-func (c *Client) sendRequest(req *http.Request, v interface{}) error {
-	req.Header.Set("Accept", "application/json; charset=utf-8")
-	req.Header.Set("api-key", c.apiKey)
+func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
+	req.Header.Set("Accept", "application/json")
+	req.Header.Add("api-key", c.apiKey)
 
 	res, err := c.HTTPClient.Do(req)
+
 	if err != nil {
 		return err
 	}
@@ -62,13 +64,14 @@ func (c *Client) sendRequest(req *http.Request, v interface{}) error {
 		return fmt.Errorf("unknown error, status code: %d", res.StatusCode)
 	}
 
-	// Unmarshall and populate v
-	fullResponse := successResponse{
-		Data: v,
+	respBodyBytes, err := io.ReadAll(res.Body)
+
+	if err != nil {
+		return fmt.Errorf("failed to read body: %s", err)
 	}
-	if err = json.NewDecoder(res.Body).Decode(&fullResponse); err != nil {
-		return err
-	}
+	defer res.Body.Close()
+
+	*responseBody = string(respBodyBytes)
 
 	return nil
 }

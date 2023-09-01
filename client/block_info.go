@@ -1,8 +1,10 @@
 package client
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/maestro-org/go-sdk/utils"
 )
@@ -28,7 +30,7 @@ type BlockInfo struct {
 		EpochSlot              int64                  `json:"epoch_slot"`
 		Era                    string                 `json:"era"`
 		Hash                   string                 `json:"hash"`
-		Height                 string                 `json:"height"`
+		Height                 int64                  `json:"height"`
 		OperationalCertificate OperationalCertificate `json:"operational_certificate"`
 		PreviousBlock          string                 `json:"previous_block"`
 		ProtocolVersion        []int                  `json:"protocol_version"`
@@ -37,7 +39,7 @@ type BlockInfo struct {
 		Timestamp              string                 `json:"timestamp"`
 		TotalExUnits           TotalExUnits           `json:"total_ex_units"`
 		TotalFees              int64                  `json:"total_fees"`
-		TotalOutputLovelace    []string               `json:"total_output_lovelace"`
+		TotalOutputLovelace    string                 `json:"total_output_lovelace"`
 		TxHashes               []string               `json:"tx_hashes"`
 		VrfKey                 string                 `json:"vrf_key"`
 	} `json:"data"`
@@ -50,11 +52,18 @@ func (c *Client) BlockInfo(blockHeight int64) (*BlockInfo, error) {
 		return nil, err
 	}
 
-	res := BlockInfo{}
-	if err := c.sendRequest(req, &res); err != nil {
+	req.Header.Set("Content-Type", "application/json")
+
+	var responseBody string
+	blockInfo := BlockInfo{}
+	if err := c.sendRequest(req, &responseBody); err != nil {
 		return nil, err
 	}
 
-	return &res, nil
+	if err := json.Unmarshal([]byte(responseBody), &blockInfo); err != nil {
+		fmt.Println("Cannot unmarshal JSON: ", err)
+		os.Exit(1)
+	}
 
+	return &blockInfo, nil
 }
