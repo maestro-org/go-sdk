@@ -53,7 +53,7 @@ import (
 )
 
 func main() {
-	maestroClient := client.NewClient("AMXzQsaXXuUPwfV4IWz8q3tMTmO6x40d", "mainnet")
+	maestroClient := client.NewClient("<PROJECT_API_KEY>", "mainnet")
 	blockInfo, err := maestroClient.BlockInfo(9005859)
 	if err != nil {
 		fmt.Printf("Failed to retrieve block info: %s\n", err)
