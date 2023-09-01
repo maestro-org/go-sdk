@@ -44,13 +44,22 @@ maestroClient := client.NewClient("<PROJECT_API_KEY>", "<NETWORK>")
 ## Example
 
 ```go
-import "github.com/maestro-org/go-sdk/client"
+package main
 
-maestroClient := client.NewClient("<PROJECT_API_KEY>", "mainnet")
+import (
+	"fmt"
 
-blockInfo := maestroClient.BlockInfo(9005859)
+	"github.com/maestro-org/go-sdk/client"
+)
 
-fmt.Println(blockInfo)
+func main() {
+	maestroClient := client.NewClient("AMXzQsaXXuUPwfV4IWz8q3tMTmO6x40d", "mainnet")
+	blockInfo, err := maestroClient.BlockInfo(9005859)
+	if err != nil {
+		fmt.Printf("Failed to retrieve block info: %s\n", err)
+	}
+	fmt.Println(blockInfo.Data.AbsoluteSlot)
+}
 ```
 
 # Documentation
