@@ -50,8 +50,6 @@ func (c *Client) BlockInfo(blockHeight int64) (*BlockInfo, error) {
 		return nil, err
 	}
 
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-
 	res := BlockInfo{}
 	if err := c.sendRequest(req, &res); err != nil {
 		return nil, err
