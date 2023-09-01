@@ -22,7 +22,7 @@ type Client struct {
 
 func NewClient(apiKey string, network string) *Client {
 	cfg := config.GetConfig()
-	paths := []string{"https://", fmt.Sprintf("%s.gomaestro-api.org", strings.ToLower(network)), cfg.Client.Version}
+	paths := []string{"https:///", fmt.Sprintf("%s.gomaestro-api.org", strings.ToLower(network)), cfg.Client.Version}
 	return &Client{
 		apiKey:  apiKey,
 		network: network,
