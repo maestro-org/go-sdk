@@ -26,6 +26,8 @@
 
 ## Installation
 
+### [Registry](https://pkg.go.dev/github.com/maestro-org/go-sdk#section-readme)
+
 ```bash
 go get -u github.com/maestro-org/go-sdk@main
 ```
