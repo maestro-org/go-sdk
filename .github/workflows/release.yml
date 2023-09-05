@@ -30,6 +30,5 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GO_RELEASER_TOKEN }}
         - name: Publish doc to go.dev packages
           run: |
-            git pull
             export latest="$(git describe --tags `git rev-list --tags --max-count=1`)"
             curl https://proxy.golang.org/github.com/akhettar/docker-db/@v/$latest.info
