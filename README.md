@@ -22,6 +22,9 @@
     <a href="https://discord.gg/ES2rDhBJt3">
       <img src="https://img.shields.io/badge/-Discord-414EEC?style=flat-square&logo=discord&logoColor=white" />
     </a>
+    <a href="https://pkg.go.dev/github.com/maestro-org/go-sdk">
+      <img src="https://pkg.go.dev/badge/golang.org/x/pkgsite.svg" />
+    </a>
   </p>
 </p>
 
@@ -29,7 +32,7 @@
 
 ## Installation
 
-### [Registry](https://pkg.go.dev/github.com/maestro-org/go-sdk#section-readme)
+### [Go Reference](https://pkg.go.dev/github.com/maestro-org/go-sdk#section-readme)
 
 ```bash
 go get -u github.com/maestro-org/go-sdk@main

@@ -32,5 +32,3 @@ jobs:
           run: |
             export latest="$(git describe --tags `git rev-list --tags --max-count=1`)"
             curl https://proxy.golang.org/github.com/maestro-org/go-sdk/@v/$latest.info
-
-

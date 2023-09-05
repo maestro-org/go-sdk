@@ -21,8 +21,3 @@ jobs:
             args: --timeout 10m
         - name: Test
           run: make test
-        # - name: Build and push image to GAR
-        #   uses: anothrNick/github-tag-action@1.64.0
-        #   env:
-        #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #     WITH_V: true
