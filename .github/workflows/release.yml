@@ -31,4 +31,6 @@ jobs:
         - name: Publish doc to go.dev packages
           run: |
             export latest="$(git describe --tags `git rev-list --tags --max-count=1`)"
-            curl https://proxy.golang.org/github.com/akhettar/docker-db/@v/$latest.info
+            curl https://proxy.golang.org/github.com/maestro-org/go-sdk/@v/$latest.info
+
+
