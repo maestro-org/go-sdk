@@ -60,3 +60,7 @@ func (p *Parameters) WithCbor() {
 func (p *Parameters) ResolveDatums() {
 	p.params = append(p.params, "resolve_datums=true")
 }
+
+func (p *Parameters) FromHeight(height int64) {
+	p.params = append(p.params, "from_height="+fmt.Sprint(height))
+}
