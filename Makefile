@@ -7,6 +7,10 @@ tidy:
 
 format: tidy
 	go fmt ./...
+	golines -w .
+
+lint: format
+	golangci-lint run
 
 test: tidy
 	go test -v ./...
