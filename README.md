@@ -30,6 +30,11 @@
 
 # Getting Started
 
+## Prerequisites
+* Go 1.21
+* [golangci-lint](https://golangci-lint.run/usage/install/) for linting
+* [golines](https://github.com/segmentio/golines) for formatting
+
 ## Installation
 
 ### [Go Reference](https://pkg.go.dev/github.com/maestro-org/go-sdk#section-readme)
