@@ -1,6 +1,7 @@
 package client
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -74,4 +75,29 @@ func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
 	*responseBody = string(respBodyBytes)
 
 	return nil
+}
+
+func (c *Client) get(url string) (*http.Response, error) {
+	req, err := http.NewRequest("GET", c.baseUrl+url, nil)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Add("api-key", c.apiKey)
+	if err != nil {
+		return nil, err
+	}
+	return c.HTTPClient.Do(req)
+}
+
+func (c *Client) post(url string, body interface{}) (*http.Response, error) {
+	jsonBody, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	req, err := http.NewRequest("POST", c.baseUrl+url, bytes.NewReader(jsonBody))
+	req.Header.Set("Accept", "application/json")
+	req.Header.Add("api-key", c.apiKey)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	return c.HTTPClient.Do(req)
 }
