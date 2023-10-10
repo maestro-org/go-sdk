@@ -17,7 +17,7 @@ type Client struct {
 	network    string
 	version    string
 	HTTPClient *http.Client
-	baseUrl    string
+	BaseUrl    string
 }
 
 func NewClient(apiKey string, network string) *Client {
@@ -29,7 +29,7 @@ func NewClient(apiKey string, network string) *Client {
 		HTTPClient: &http.Client{
 			Timeout: 5 * time.Minute,
 		},
-		baseUrl: fmt.Sprintf("https://%s.gomaestro-api.org/%s", network, cfg.Client.Version),
+		BaseUrl: fmt.Sprintf("https://%s.gomaestro-api.org/%s", network, cfg.Client.Version),
 	}
 }
 
@@ -78,7 +78,7 @@ func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
 }
 
 func (c *Client) get(url string) (*http.Response, error) {
-	req, err := http.NewRequest("GET", c.baseUrl+url, nil)
+	req, err := http.NewRequest("GET", c.BaseUrl+url, nil)
 	req.Header.Set("Accept", "application/json")
 	req.Header.Add("api-key", c.apiKey)
 	if err != nil {
@@ -92,7 +92,7 @@ func (c *Client) post(url string, body interface{}) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req, err := http.NewRequest("POST", c.baseUrl+url, bytes.NewReader(jsonBody))
+	req, err := http.NewRequest("POST", c.BaseUrl+url, bytes.NewReader(jsonBody))
 	req.Header.Set("Accept", "application/json")
 	req.Header.Add("api-key", c.apiKey)
 	if err != nil {
