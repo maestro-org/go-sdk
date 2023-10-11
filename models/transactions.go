@@ -10,12 +10,14 @@ type Certificates struct {
 	StakeDeregistrations       []any `json:"stake_deregistrations"`
 	StakeRegistrationsReserves []any `json:"stake_registrations_reserves"`
 }
+
 type Redeemers struct {
 	Certificates []any `json:"certificates"`
 	Mints        []any `json:"mints"`
 	Spends       []any `json:"spends"`
 	Withdrawals  []any `json:"withdrawals"`
 }
+
 type TransactionDetail struct {
 	AdditionalSigners []string     `json:"additional_signers"`
 	BlockAbsoluteSlot int64        `json:"block_absolute_slot"`
