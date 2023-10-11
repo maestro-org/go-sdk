@@ -120,11 +120,7 @@ func (c *Client) UtxosAtAddresses(addresses []string, params *utils.Parameters) 
 		formattedParams = params.Format()
 	}
 	url := fmt.Sprintf("/addresses/utxos%s", formattedParams)
-	body := struct {
-		Addresses []string `json:"addresses"`
-	}{
-		Addresses: addresses,
-	}
+	body := addresses
 	resp, err := c.post(url, body)
 	if err != nil {
 		return nil, err
