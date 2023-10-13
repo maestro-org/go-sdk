@@ -31,7 +31,7 @@
 # Getting Started
 
 ## Prerequisites
-* Go 1.21
+* Go 1.20
 * [golangci-lint](https://golangci-lint.run/usage/install/) for linting
 * [golines](https://github.com/segmentio/golines) for formatting
 
