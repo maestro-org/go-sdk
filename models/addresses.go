@@ -74,15 +74,23 @@ type Asset struct {
 }
 
 type Utxo struct {
-	Address         string  `json:"address"`
-	Assets          []Asset `json:"assets"`
-	Datum           any     `json:"datum"`
-	Index           int64   `json:"index"`
-	ReferenceScript string  `json:"reference_script"`
-	TxHash          string  `json:"tx_hash"`
-	Slot            int64   `json:"slot"`
-	TxOutCbor       string  `json:"tx_out_cbor"`
+	Address         string          `json:"address"`
+	Assets          []Asset         `json:"assets"`
+	Datum           any             `json:"datum"`
+	Index           int64           `json:"index"`
+	ReferenceScript ReferenceScript `json:"reference_script"`
+	TxHash          string          `json:"tx_hash"`
+	Slot            int64           `json:"slot"`
+	TxOutCbor       string          `json:"tx_out_cbor"`
 }
+
+type ReferenceScript struct {
+	Bytes string                 `json:"bytes"`
+	Hash  string                 `json:"hash"`
+	JSON  map[string]interface{} `json:"json"`
+	Type  string                 `json:"type"`
+}
+
 type UtxosAtAddress struct {
 	Data        []Utxo            `json:"data"`
 	LastUpdated utils.LastUpdated `json:"last_updated"`
