@@ -27,7 +27,10 @@ func (c *Client) ListOfRegisteredPools(params *utils.Parameters) (*models.Regist
 	return &registeredPools, nil
 }
 
-func (c *Client) StakePoolMintedBlocks(poolId string, params *utils.Parameters) (*models.PoolMintedBlocks, error) {
+func (c *Client) StakePoolMintedBlocks(
+	poolId string,
+	params *utils.Parameters,
+) (*models.PoolMintedBlocks, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -46,7 +49,10 @@ func (c *Client) StakePoolMintedBlocks(poolId string, params *utils.Parameters) 
 	return &poolMintedBlocks, nil
 }
 
-func (c *Client) StakePoolDelegators(poolId string, params *utils.Parameters) (*models.StakePoolDelegators, error) {
+func (c *Client) StakePoolDelegators(
+	poolId string,
+	params *utils.Parameters,
+) (*models.StakePoolDelegators, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -65,7 +71,10 @@ func (c *Client) StakePoolDelegators(poolId string, params *utils.Parameters) (*
 	return &stakePoolDelegators, nil
 }
 
-func (c *Client) StakePoolHistory(poolId string, params *utils.Parameters) (*models.StakePoolHistory, error) {
+func (c *Client) StakePoolHistory(
+	poolId string,
+	params *utils.Parameters,
+) (*models.StakePoolHistory, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
