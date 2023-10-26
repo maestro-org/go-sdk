@@ -7,7 +7,7 @@ import (
 	"github.com/maestro-org/go-sdk/models"
 )
 
-type CreateLock struct {
+type LockBody struct {
 	Sender                   string `json:"sender"`
 	Beneficiary              string `json:"beneficiary"`
 	AssetPolicyId            string `json:"asset_policy_id"`
@@ -19,10 +19,10 @@ type CreateLock struct {
 	TotalInstallments        int64  `json:"total_installments"`
 }
 
-func (c *Client) LockAssets(createLock CreateLock) (*models.LockTransaction, error) {
+func (c *Client) LockAssets(lockBody LockBody) (*models.LockTransaction, error) {
 	url := "/contracts/vesting/lock"
 
-	body := createLock
+	body := lockBody
 	resp, err := c.post(url, body)
 	if err != nil {
 		return nil, err
@@ -43,12 +43,12 @@ func (c *Client) StateOfVestingAssets(beneficiary string) (*[]models.VestingStat
 		return nil, err
 	}
 	defer resp.Body.Close()
-	var vestingState []models.VestingState
-	err = json.NewDecoder(resp.Body).Decode(&vestingState)
+	var vestingStates []models.VestingState
+	err = json.NewDecoder(resp.Body).Decode(&vestingStates)
 	if err != nil {
 		return nil, err
 	}
-	return &vestingState, nil
+	return &vestingStates, nil
 
 }
 
