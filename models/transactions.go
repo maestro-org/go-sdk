@@ -65,3 +65,21 @@ type TransactionOutputsFromReferences struct {
 	LastUpdated utils.LastUpdated `json:"last_updated"`
 	NextCursor  string            `json:"next_cursor"`
 }
+
+type EvaluateTx struct {
+	Cbor            string   `json:"cbor"`
+	AdditionalUtxos []string `json:"additional_utxos"`
+}
+
+type ExecutionUnits struct {
+	Mem   int64 `json:"Mem"`
+	Steps int64 `json:"Steps"`
+}
+
+type RedeemerEvaluation struct {
+	ExUnits       ExecutionUnits `json:"ex_units"`
+	RedeemerIndex int            `json:"redeemer_index"`
+	RedeemerTag   string         `json:"redeemer_tag"`
+}
+
+type EvaluateTxResponse []RedeemerEvaluation

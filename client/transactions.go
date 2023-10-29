@@ -110,3 +110,22 @@ func (c *Client) TransactionOutputsFromReferences(references []models.TxoReferen
 	return &transactionOutputsFromReferences, nil
 
 }
+
+func (c *Client) EvaluateTx(txCbor string, AdditionalUtxos ...string) ([]models.RedeemerEvaluation, error) {
+	url := "/transactions/evaluate"
+	body := models.EvaluateTx{
+		Cbor:            txCbor,
+		AdditionalUtxos: AdditionalUtxos,
+	}
+	resp, err := c.post(url, body)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	var redeemerEvals []models.RedeemerEvaluation
+	err = json.NewDecoder(resp.Body).Decode(&redeemerEvals)
+	if err != nil {
+		return nil, err
+	}
+	return redeemerEvals, nil
+}
