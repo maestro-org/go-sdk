@@ -8,7 +8,10 @@ import (
 	"github.com/maestro-org/go-sdk/utils"
 )
 
-func (c *Client) AccountsHoldingAsset(assetId string, params *utils.Parameters) (*models.AccountsHoldingAsset, error) {
+func (c *Client) AccountsHoldingAsset(
+	assetId string,
+	params *utils.Parameters,
+) (*models.AccountsHoldingAsset, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -27,7 +30,10 @@ func (c *Client) AccountsHoldingAsset(assetId string, params *utils.Parameters) 
 	return &accountsHoldingAsset, nil
 }
 
-func (c *Client) AddressHoldingAsset(assetId string, params *utils.Parameters) (*models.AddressesHoldingAsset, error) {
+func (c *Client) AddressHoldingAsset(
+	assetId string,
+	params *utils.Parameters,
+) (*models.AddressesHoldingAsset, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -61,7 +67,10 @@ func (c *Client) Asset(assetId string) (*models.AssetInformations, error) {
 	return &assetInformation, nil
 }
 
-func (c *Client) AssetTransactions(assetId string, params *utils.Parameters) (*models.AssetTransactions, error) {
+func (c *Client) AssetTransactions(
+	assetId string,
+	params *utils.Parameters,
+) (*models.AssetTransactions, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -80,7 +89,10 @@ func (c *Client) AssetTransactions(assetId string, params *utils.Parameters) (*m
 	return &assetTransactions, nil
 }
 
-func (c *Client) AssetUpdates(assetId string, params *utils.Parameters) (*models.AssetUpdates, error) {
+func (c *Client) AssetUpdates(
+	assetId string,
+	params *utils.Parameters,
+) (*models.AssetUpdates, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()

@@ -8,7 +8,10 @@ import (
 	"github.com/maestro-org/go-sdk/utils"
 )
 
-func (c *Client) AccountsHoldingPolicy(policy string, params *utils.Parameters) (*models.AccountsHoldingPolicy, error) {
+func (c *Client) AccountsHoldingPolicy(
+	policy string,
+	params *utils.Parameters,
+) (*models.AccountsHoldingPolicy, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -27,7 +30,10 @@ func (c *Client) AccountsHoldingPolicy(policy string, params *utils.Parameters) 
 	return &response, err
 }
 
-func (c *Client) AddressesHoldingPolicy(policy string, params *utils.Parameters) (*models.AddressesHoldingPolicy, error) {
+func (c *Client) AddressesHoldingPolicy(
+	policy string,
+	params *utils.Parameters,
+) (*models.AddressesHoldingPolicy, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -46,7 +52,10 @@ func (c *Client) AddressesHoldingPolicy(policy string, params *utils.Parameters)
 	return &response, err
 }
 
-func (c *Client) SpecificPolicyInformations(policy string, params *utils.Parameters) (*models.PolicyInformation, error) {
+func (c *Client) SpecificPolicyInformations(
+	policy string,
+	params *utils.Parameters,
+) (*models.PolicyInformation, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -65,7 +74,10 @@ func (c *Client) SpecificPolicyInformations(policy string, params *utils.Paramet
 	return &response, err
 }
 
-func (c *Client) TransactionsMovingPolicy(policy string, params *utils.Parameters) (*models.PolicyTransactions, error) {
+func (c *Client) TransactionsMovingPolicy(
+	policy string,
+	params *utils.Parameters,
+) (*models.PolicyTransactions, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -84,7 +96,10 @@ func (c *Client) TransactionsMovingPolicy(policy string, params *utils.Parameter
 	return &response, err
 }
 
-func (c *Client) UtxosContainingPolicy(policy string, params *utils.Parameters) (*models.UtxosContainingPolicy, error) {
+func (c *Client) UtxosContainingPolicy(
+	policy string,
+	params *utils.Parameters,
+) (*models.UtxosContainingPolicy, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()

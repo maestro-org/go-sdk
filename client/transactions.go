@@ -71,7 +71,11 @@ func (c *Client) TransactionDetails(txHash string) (*models.TransactionDetails, 
 
 }
 
-func (c *Client) TransactionOutputFromReference(txHash string, index int, params *utils.Parameters) (*models.TransactionOutputFromReference, error) {
+func (c *Client) TransactionOutputFromReference(
+	txHash string,
+	index int,
+	params *utils.Parameters,
+) (*models.TransactionOutputFromReference, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -90,7 +94,10 @@ func (c *Client) TransactionOutputFromReference(txHash string, index int, params
 	return &transactionOutputFromReference, nil
 }
 
-func (c *Client) TransactionOutputsFromReferences(references []models.TxoReference, params *utils.Parameters) (*models.TransactionOutputsFromReferences, error) {
+func (c *Client) TransactionOutputsFromReferences(
+	references []models.TxoReference,
+	params *utils.Parameters,
+) (*models.TransactionOutputsFromReferences, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()

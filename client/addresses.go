@@ -38,7 +38,10 @@ func (c *Client) AddressTransactionCount(address string) (*models.AddressTransac
 	return &addressTransactionCount, nil
 }
 
-func (c *Client) AddressTransactions(address string, params *utils.Parameters) (*models.AddressTransactions, error) {
+func (c *Client) AddressTransactions(
+	address string,
+	params *utils.Parameters,
+) (*models.AddressTransactions, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -57,7 +60,10 @@ func (c *Client) AddressTransactions(address string, params *utils.Parameters) (
 	return &addressTransactions, nil
 }
 
-func (c *Client) PaymentCredentialTransactions(paymentCredential string, params *utils.Parameters) (*models.AddressTransactions, error) {
+func (c *Client) PaymentCredentialTransactions(
+	paymentCredential string,
+	params *utils.Parameters,
+) (*models.AddressTransactions, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -76,7 +82,10 @@ func (c *Client) PaymentCredentialTransactions(paymentCredential string, params 
 	return &addressTransactions, nil
 }
 
-func (c *Client) UtxoReferencesAtAddress(address string, params *utils.Parameters) (*models.UtxoReferencesAtAddress, error) {
+func (c *Client) UtxoReferencesAtAddress(
+	address string,
+	params *utils.Parameters,
+) (*models.UtxoReferencesAtAddress, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -95,7 +104,10 @@ func (c *Client) UtxoReferencesAtAddress(address string, params *utils.Parameter
 	return &utxoReferencesAtAddress, nil
 }
 
-func (c *Client) UtxosAtAddress(address string, params *utils.Parameters) (*models.UtxosAtAddress, error) {
+func (c *Client) UtxosAtAddress(
+	address string,
+	params *utils.Parameters,
+) (*models.UtxosAtAddress, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -114,7 +126,10 @@ func (c *Client) UtxosAtAddress(address string, params *utils.Parameters) (*mode
 	return &utxosAtAddress, nil
 }
 
-func (c *Client) UtxosAtAddresses(addresses []string, params *utils.Parameters) (*models.UtxosAtAddress, error) {
+func (c *Client) UtxosAtAddresses(
+	addresses []string,
+	params *utils.Parameters,
+) (*models.UtxosAtAddress, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
@@ -134,7 +149,10 @@ func (c *Client) UtxosAtAddresses(addresses []string, params *utils.Parameters) 
 	return &utxosAtAddress, nil
 }
 
-func (c *Client) UtxosByPaymentCredential(paymentCredential string, params *utils.Parameters) (*models.UtxosAtAddress, error) {
+func (c *Client) UtxosByPaymentCredential(
+	paymentCredential string,
+	params *utils.Parameters,
+) (*models.UtxosAtAddress, error) {
 	formattedParams := ""
 	if params != nil {
 		formattedParams = params.Format()
