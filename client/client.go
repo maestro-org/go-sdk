@@ -101,3 +101,14 @@ func (c *Client) post(url string, body interface{}) (*http.Response, error) {
 	req.Header.Set("Content-Type", "application/json")
 	return c.HTTPClient.Do(req)
 }
+
+func (c *Client) postBuffer(url string, buffer []byte) (*http.Response, error) {
+	req, err := http.NewRequest("POST", c.BaseUrl+url, bytes.NewBuffer(buffer))
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Add("api-key", c.apiKey)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/cbor")
+	return c.HTTPClient.Do(req)
+}
