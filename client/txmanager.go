@@ -26,7 +26,10 @@ func (c *Client) TxManagerHistory() (*[]models.TxManagerState, error) {
 
 func (c *Client) TxManagerSubmit(txHex string) (string, error) {
 	url := "/txmanager"
-	txBuffer, _ := hex.DecodeString(txHex)
+	txBuffer, err := hex.DecodeString(txHex)
+	if err != nil {
+		return "", err
+	}
 	resp, err := c.postBuffer(url, txBuffer)
 	if err != nil {
 		return "", err
@@ -42,7 +45,10 @@ func (c *Client) TxManagerSubmit(txHex string) (string, error) {
 
 func (c *Client) TxManagerSubmitTurbo(txHex string) (string, error) {
 	url := "/txmanager/turbosubmit"
-	txBuffer, _ := hex.DecodeString(txHex)
+	txBuffer, err := hex.DecodeString(txHex)
+	if err != nil {
+		return "", err
+	}
 	resp, err := c.postBuffer(url, txBuffer)
 	if err != nil {
 		return "", err
