@@ -67,3 +67,25 @@ func (c *Client) BlockInfo(blockHeight int64) (*BlockInfo, error) {
 
 	return &blockInfo, nil
 }
+
+func (c *Client) LatestBlock() (*BlockInfo, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/blocks/latest", c.BaseUrl), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	var responseBody string
+	blockInfo := BlockInfo{}
+	if err := c.sendRequest(req, &responseBody); err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal([]byte(responseBody), &blockInfo); err != nil {
+		fmt.Println("Cannot unmarshal JSON: ", err)
+		os.Exit(1)
+	}
+
+	return &blockInfo, nil
+}

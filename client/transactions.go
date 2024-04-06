@@ -32,6 +32,7 @@ func (c *Client) SubmitTx(cbor string) (models.BasicResponse, error) {
 	}
 	defer resp.Body.Close()
 	var submitTx models.BasicResponse
+
 	err = json.NewDecoder(resp.Body).Decode(&submitTx)
 	if err != nil {
 		return models.BasicResponse{}, err

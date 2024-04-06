@@ -3,11 +3,11 @@ package models
 import "github.com/maestro-org/go-sdk/utils"
 
 type Epoch struct {
-	BlkCount  int `json:"blk_count"`
-	EpochNo   int `json:"epoch_no"`
-	Fees      int `json:"fees"`
-	StartTime int `json:"start_time"`
-	TxCount   int `json:"tx_count"`
+	BlkCount  int    `json:"blk_count"`
+	EpochNo   int    `json:"epoch_no"`
+	Fees      string `json:"fees"`
+	StartTime int    `json:"start_time"`
+	TxCount   int    `json:"tx_count"`
 }
 
 type EpochResp struct {
