@@ -81,7 +81,7 @@ type Utxo struct {
 	ReferenceScript ReferenceScript `json:"reference_script"`
 	TxHash          string          `json:"tx_hash"`
 	Slot            int64           `json:"slot"`
-	TxOutCbor       string          `json:"tx_out_cbor"`
+	TxOutCbor       string          `json:"txout_cbor"`
 }
 
 type ReferenceScript struct {
