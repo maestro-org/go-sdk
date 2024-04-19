@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 	"github.com/maestro-org/go-sdk/utils"
@@ -20,6 +21,9 @@ func (c *Client) AccountAddresses(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var accountAddresses models.AccountAddresses
@@ -43,6 +47,9 @@ func (c *Client) AccountAssets(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var accountAssets models.AccountAssets
 	err = json.NewDecoder(resp.Body).Decode(&accountAssets)
@@ -65,6 +72,9 @@ func (c *Client) StakeAccountHistory(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var stakeAccountHistory models.StakeAccountHistory
 	err = json.NewDecoder(resp.Body).Decode(&stakeAccountHistory)
@@ -82,6 +92,10 @@ func (c *Client) StakeAccountInformation(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
+
 	defer resp.Body.Close()
 	var stakeAccountInformation models.StakeAccountInformation
 	err = json.NewDecoder(resp.Body).Decode(&stakeAccountInformation)
@@ -104,6 +118,9 @@ func (c *Client) StakeAccountRewards(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var stakeAccountRewards models.StakeAccountRewards
 	err = json.NewDecoder(resp.Body).Decode(&stakeAccountRewards)
@@ -125,6 +142,9 @@ func (c *Client) StakeAccountUpdates(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var stakeAccountUpdates models.StakeAccountUpdates

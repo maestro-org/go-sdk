@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 )
@@ -27,6 +28,9 @@ func (c *Client) LockAssets(lockBody LockBody) (*models.LockTransaction, error) 
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var lockTransaction models.LockTransaction
 	err = json.NewDecoder(resp.Body).Decode(&lockTransaction)
@@ -41,6 +45,9 @@ func (c *Client) StateOfVestingAssets(beneficiary string) (*[]models.VestingStat
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var vestingStates []models.VestingState
@@ -57,6 +64,9 @@ func (c *Client) CollectAssets(beneficiary string) (*models.CollectTransaction, 
 	resp, err := c.post(url, nil)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var collectTransaction models.CollectTransaction

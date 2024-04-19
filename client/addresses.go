@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 	"github.com/maestro-org/go-sdk/utils"
@@ -13,6 +14,9 @@ func (c *Client) DecodeAddress(address string) (*models.DecodedAddress, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var decodedAddress models.DecodedAddress
@@ -28,6 +32,9 @@ func (c *Client) AddressTransactionCount(address string) (*models.AddressTransac
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var addressTransactionCount models.AddressTransactionCount
@@ -51,6 +58,9 @@ func (c *Client) AddressTransactions(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var addressTransactions models.AddressTransactions
 	err = json.NewDecoder(resp.Body).Decode(&addressTransactions)
@@ -72,6 +82,9 @@ func (c *Client) PaymentCredentialTransactions(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var addressTransactions models.AddressTransactions
@@ -95,6 +108,9 @@ func (c *Client) UtxoReferencesAtAddress(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var utxoReferencesAtAddress models.UtxoReferencesAtAddress
 	err = json.NewDecoder(resp.Body).Decode(&utxoReferencesAtAddress)
@@ -116,6 +132,9 @@ func (c *Client) UtxosAtAddress(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var utxosAtAddress models.UtxosAtAddress
@@ -140,6 +159,9 @@ func (c *Client) UtxosAtAddresses(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var utxosAtAddress models.UtxosAtAddress
 	err = json.NewDecoder(resp.Body).Decode(&utxosAtAddress)
@@ -161,6 +183,9 @@ func (c *Client) UtxosByPaymentCredential(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var utxosAtAddress models.UtxosAtAddress

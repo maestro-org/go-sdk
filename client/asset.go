@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 	"github.com/maestro-org/go-sdk/utils"
@@ -20,6 +21,9 @@ func (c *Client) AccountsHoldingAsset(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var accountsHoldingAsset models.AccountsHoldingAsset
@@ -43,6 +47,9 @@ func (c *Client) AddressHoldingAsset(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var addressesHoldingAsset models.AddressesHoldingAsset
 	err = json.NewDecoder(resp.Body).Decode(&addressesHoldingAsset)
@@ -57,6 +64,9 @@ func (c *Client) Asset(assetId string) (*models.AssetInformations, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var assetInformation models.AssetInformations
@@ -80,6 +90,9 @@ func (c *Client) AssetTransactions(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var assetTransactions models.AssetTransactions
 	err = json.NewDecoder(resp.Body).Decode(&assetTransactions)
@@ -102,6 +115,9 @@ func (c *Client) AssetUpdates(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var assetUpdates models.AssetUpdates
 	err = json.NewDecoder(resp.Body).Decode(&assetUpdates)
@@ -121,6 +137,9 @@ func (c *Client) AssetUtxos(assetId string, params *utils.Parameters) (*models.A
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var assetUtxos models.AssetUtxos

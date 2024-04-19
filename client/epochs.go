@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 )
@@ -12,6 +13,9 @@ func (c *Client) CurrentEpoch() (*models.EpochResp, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var currentEpoch models.EpochResp
@@ -27,6 +31,9 @@ func (c *Client) SpecificEpoch(epochNo int) (*models.EpochResp, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var specificEpoch models.EpochResp
