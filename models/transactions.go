@@ -36,10 +36,10 @@ type TransactionDetail struct {
 	Metadata          any          `json:"metadata"`
 	Mint              []any        `json:"mint"`
 	Outputs           []Utxo       `json:"outputs"`
-	Redeemers         []Redeemers  `json:"redeemers"`
+	Redeemers         Redeemers    `json:"redeemers"`
 	ReferenceInputs   []any        `json:"reference_inputs"`
 	ScriptsExecuted   []Script     `json:"scripts_executed"`
-	ScriptsSuccesful  bool         `json:"scripts_succesful"`
+	ScriptsSuccessful bool         `json:"scripts_successful"`
 	Size              int64        `json:"size"`
 	TxHash            string       `json:"tx_hash"`
 	Withdrawals       []any        `json:"withdrawals"`
