@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 )
@@ -14,6 +15,9 @@ func (c *Client) TxManagerHistory() (*[]models.TxManagerState, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var txManagerStates []models.TxManagerState
@@ -34,6 +38,9 @@ func (c *Client) TxManagerSubmit(txHex string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -53,6 +60,9 @@ func (c *Client) TxManagerSubmitTurbo(txHex string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -67,6 +77,9 @@ func (c *Client) TxManagerState(txHash string) (*models.TxManagerState, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var txManagerState models.TxManagerState

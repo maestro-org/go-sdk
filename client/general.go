@@ -2,6 +2,8 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 )
@@ -11,6 +13,9 @@ func (c *Client) ChainTip() (*models.ChainTip, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var chainTip models.ChainTip
@@ -27,6 +32,9 @@ func (c *Client) EraHistory() (*models.EraHistory, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var eraHistory models.EraHistory
 	err = json.NewDecoder(resp.Body).Decode(&eraHistory)
@@ -42,6 +50,9 @@ func (c *Client) ProtocolParameters() (*models.ProtocolParameters, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var protocolParameters models.ProtocolParameters
 	err = json.NewDecoder(resp.Body).Decode(&protocolParameters)
@@ -56,6 +67,9 @@ func (c *Client) BlockChainStartTime() (models.BasicResponse, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return models.BasicResponse{}, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return models.BasicResponse{}, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var blockchainStartTime models.BasicResponse

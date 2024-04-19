@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 	"github.com/maestro-org/go-sdk/utils"
@@ -20,6 +21,9 @@ func (c *Client) AccountsHoldingPolicy(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var response models.AccountsHoldingPolicy
@@ -43,6 +47,9 @@ func (c *Client) AddressesHoldingPolicy(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var response models.AddressesHoldingPolicy
 	err = json.NewDecoder(resp.Body).Decode(&response)
@@ -64,6 +71,9 @@ func (c *Client) SpecificPolicyInformations(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var response models.PolicyInformation
@@ -87,6 +97,9 @@ func (c *Client) TransactionsMovingPolicy(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var response models.PolicyTransactions
 	err = json.NewDecoder(resp.Body).Decode(&response)
@@ -108,6 +121,9 @@ func (c *Client) UtxosContainingPolicy(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var response models.UtxosContainingPolicy

@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 	"github.com/maestro-org/go-sdk/utils"
@@ -17,6 +18,9 @@ func (c *Client) ListOfRegisteredPools(params *utils.Parameters) (*models.Regist
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var registeredPools models.RegisteredPools
@@ -40,6 +44,9 @@ func (c *Client) StakePoolMintedBlocks(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var poolMintedBlocks models.PoolMintedBlocks
 	err = json.NewDecoder(resp.Body).Decode(&poolMintedBlocks)
@@ -61,6 +68,9 @@ func (c *Client) StakePoolDelegators(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var stakePoolDelegators models.StakePoolDelegators
@@ -84,6 +94,9 @@ func (c *Client) StakePoolHistory(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var stakePoolHistory models.StakePoolHistory
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolHistory)
@@ -98,6 +111,9 @@ func (c *Client) StakePoolInformation(poolId string) (*models.StakePoolInformati
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var stakePoolInformation models.StakePoolInformation
@@ -114,6 +130,9 @@ func (c *Client) StakePoolMetadata(poolId string) (*models.StakePoolMetadata, er
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var stakePoolMetadata models.StakePoolMetadata
 	err = json.NewDecoder(resp.Body).Decode(&stakePoolMetadata)
@@ -128,6 +147,9 @@ func (c *Client) StakePoolRelays(poolId string) (*models.StakePoolRelays, error)
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var stakePoolRelays models.StakePoolRelays
@@ -144,6 +166,9 @@ func (c *Client) StakePoolUpdates(poolId string) (*models.StakePoolUpdates, erro
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var stakePoolUpdates models.StakePoolUpdates

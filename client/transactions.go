@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/maestro-org/go-sdk/models"
 	"github.com/maestro-org/go-sdk/utils"
@@ -13,6 +14,9 @@ func (c *Client) AddressByOutputReference(txHash string, index int) (*models.Bas
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var addressByOutputReference models.BasicResponse
@@ -30,6 +34,9 @@ func (c *Client) SubmitTx(cbor string) (models.BasicResponse, error) {
 	if err != nil {
 		return models.BasicResponse{}, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return models.BasicResponse{}, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var submitTx models.BasicResponse
 
@@ -46,6 +53,9 @@ func (c *Client) TransactionCbor(txHash string) (*models.BasicResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var transactionCbor models.BasicResponse
 	err = json.NewDecoder(resp.Body).Decode(&transactionCbor)
@@ -61,6 +71,9 @@ func (c *Client) TransactionDetails(txHash string) (*models.TransactionDetails, 
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var transactionDetails models.TransactionDetails
@@ -86,6 +99,9 @@ func (c *Client) TransactionOutputFromReference(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var transactionOutputFromReference models.TransactionOutputFromReference
 	err = json.NewDecoder(resp.Body).Decode(&transactionOutputFromReference)
@@ -109,6 +125,9 @@ func (c *Client) TransactionOutputsFromReferences(
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
+	}
 	defer resp.Body.Close()
 	var transactionOutputsFromReferences models.TransactionOutputsFromReferences
 	err = json.NewDecoder(resp.Body).Decode(&transactionOutputsFromReferences)
@@ -128,6 +147,9 @@ func (c *Client) EvaluateTx(txCbor string, AdditionalUtxos ...string) ([]models.
 	resp, err := c.post(url, body)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
 	var redeemerEvals []models.RedeemerEvaluation
