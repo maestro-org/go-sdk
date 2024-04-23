@@ -38,7 +38,7 @@ func (c *Client) TxManagerSubmit(txHex string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
 		return "", fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
@@ -60,7 +60,7 @@ func (c *Client) TxManagerSubmitTurbo(txHex string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
 		return "", fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
