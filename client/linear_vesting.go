@@ -28,6 +28,9 @@ func (c *Client) LockAssets(lockBody LockBody) (*models.LockTransaction, error) 
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -45,6 +48,9 @@ func (c *Client) StateOfVestingAssets(beneficiary string) (*[]models.VestingStat
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
@@ -64,6 +70,9 @@ func (c *Client) CollectAssets(beneficiary string) (*models.CollectTransaction, 
 	resp, err := c.post(url, nil)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)

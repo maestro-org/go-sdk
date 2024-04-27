@@ -22,6 +22,9 @@ func (c *Client) AccountsHoldingAsset(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -47,6 +50,9 @@ func (c *Client) AddressHoldingAsset(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -64,6 +70,9 @@ func (c *Client) Asset(assetId string) (*models.AssetInformations, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
@@ -90,6 +99,9 @@ func (c *Client) AssetTransactions(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -115,6 +127,9 @@ func (c *Client) AssetUpdates(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -137,6 +152,9 @@ func (c *Client) AssetUtxos(assetId string, params *utils.Parameters) (*models.A
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)

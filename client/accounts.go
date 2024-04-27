@@ -22,6 +22,9 @@ func (c *Client) AccountAddresses(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -46,6 +49,9 @@ func (c *Client) AccountAssets(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
@@ -72,6 +78,9 @@ func (c *Client) StakeAccountHistory(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -91,6 +100,9 @@ func (c *Client) StakeAccountInformation(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
@@ -118,6 +130,9 @@ func (c *Client) StakeAccountRewards(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -142,6 +157,9 @@ func (c *Client) StakeAccountUpdates(
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)

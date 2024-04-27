@@ -15,6 +15,9 @@ func (c *Client) AddressByOutputReference(txHash string, index int) (*models.Bas
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -29,10 +32,13 @@ func (c *Client) AddressByOutputReference(txHash string, index int) (*models.Bas
 }
 
 func (c *Client) SubmitTx(cbor string) (models.BasicResponse, error) {
-	url := "/submit/tx"
+	url := "/submitmodels.BasicResponse{}/tx"
 	resp, err := c.post(url, cbor)
 	if err != nil {
 		return models.BasicResponse{}, err
+	}
+	if resp == nil {
+		return models.BasicResponse{}, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return models.BasicResponse{}, fmt.Errorf("unexpected error: %d", resp.Body)
@@ -53,6 +59,9 @@ func (c *Client) TransactionCbor(txHash string) (*models.BasicResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -71,6 +80,9 @@ func (c *Client) TransactionDetails(txHash string) (*models.TransactionDetails, 
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
@@ -99,6 +111,9 @@ func (c *Client) TransactionOutputFromReference(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -125,6 +140,9 @@ func (c *Client) TransactionOutputsFromReferences(
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -138,7 +156,10 @@ func (c *Client) TransactionOutputsFromReferences(
 
 }
 
-func (c *Client) EvaluateTx(txCbor string, AdditionalUtxos ...string) ([]models.RedeemerEvaluation, error) {
+func (c *Client) EvaluateTx(
+	txCbor string,
+	AdditionalUtxos ...string,
+) ([]models.RedeemerEvaluation, error) {
 	url := "/transactions/evaluate"
 	body := models.EvaluateTx{
 		Cbor:            txCbor,
@@ -147,6 +168,9 @@ func (c *Client) EvaluateTx(txCbor string, AdditionalUtxos ...string) ([]models.
 	resp, err := c.post(url, body)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
