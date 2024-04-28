@@ -14,6 +14,9 @@ func (c *Client) ChainTip() (*models.ChainTip, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -31,6 +34,9 @@ func (c *Client) EraHistory() (*models.EraHistory, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
@@ -50,6 +56,9 @@ func (c *Client) ProtocolParameters() (*models.ProtocolParameters, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -67,6 +76,9 @@ func (c *Client) BlockChainStartTime() (models.BasicResponse, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return models.BasicResponse{}, err
+	}
+	if resp == nil {
+		return models.BasicResponse{}, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return models.BasicResponse{}, fmt.Errorf("unexpected error: %d", resp.Body)

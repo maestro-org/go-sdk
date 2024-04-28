@@ -44,33 +44,40 @@ type errorResponse struct {
 // }
 
 func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
+	if req == nil {
+		return fmt.Errorf("empty request")
+	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Add("api-key", c.apiKey)
 
-	res, err := c.HTTPClient.Do(req)
+	if c.HTTPClient == nil {
+		return fmt.Errorf("missing http client")
+	}
+	resp, err := c.HTTPClient.Do(req)
 
 	if err != nil {
 		return err
 	}
-
-	defer res.Body.Close()
+	if resp == nil {
+		return fmt.Errorf("empty response")
+	}
 
 	// Try to unmarshall into errorResponse
-	if res.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusOK {
 		var errRes errorResponse
-		if err = json.NewDecoder(res.Body).Decode(&errRes); err == nil {
+		if err = json.NewDecoder(resp.Body).Decode(&errRes); err == nil {
 			return errors.New(errRes.Message)
 		}
 
-		return fmt.Errorf("unknown error, status code: %d", res.StatusCode)
+		return fmt.Errorf("unknown error, status code: %d", resp.StatusCode)
 	}
 
-	respBodyBytes, err := io.ReadAll(res.Body)
+	respBodyBytes, err := io.ReadAll(resp.Body)
 
 	if err != nil {
 		return fmt.Errorf("failed to read body: %s", err)
 	}
-	defer res.Body.Close()
+	defer resp.Body.Close()
 
 	*responseBody = string(respBodyBytes)
 
@@ -79,11 +86,14 @@ func (c *Client) sendRequest(req *http.Request, responseBody *string) error {
 
 func (c *Client) get(url string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", c.BaseUrl+url, nil)
-	req.Header.Set("Accept", "application/json")
-	req.Header.Add("api-key", c.apiKey)
 	if err != nil {
 		return nil, err
 	}
+	if req == nil {
+		return nil, fmt.Errorf("empty request")
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Add("api-key", c.apiKey)
 	return c.HTTPClient.Do(req)
 }
 
@@ -93,22 +103,28 @@ func (c *Client) post(url string, body interface{}) (*http.Response, error) {
 		return nil, err
 	}
 	req, err := http.NewRequest("POST", c.BaseUrl+url, bytes.NewReader(jsonBody))
-	req.Header.Set("Accept", "application/json")
-	req.Header.Add("api-key", c.apiKey)
 	if err != nil {
 		return nil, err
 	}
+	if req == nil {
+		return nil, fmt.Errorf("empty request")
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Add("api-key", c.apiKey)
 	req.Header.Set("Content-Type", "application/json")
 	return c.HTTPClient.Do(req)
 }
 
 func (c *Client) postBuffer(url string, buffer []byte) (*http.Response, error) {
 	req, err := http.NewRequest("POST", c.BaseUrl+url, bytes.NewBuffer(buffer))
-	req.Header.Set("Accept", "application/cbor")
-	req.Header.Add("api-key", c.apiKey)
 	if err != nil {
 		return nil, err
 	}
+	if req == nil {
+		return nil, fmt.Errorf("empty request")
+	}
+	req.Header.Set("Accept", "application/cbor")
+	req.Header.Add("api-key", c.apiKey)
 	req.Header.Set("Content-Type", "application/cbor")
 	return c.HTTPClient.Do(req)
 }

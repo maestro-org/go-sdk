@@ -16,6 +16,9 @@ func (c *Client) TxManagerHistory() (*[]models.TxManagerState, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -37,6 +40,9 @@ func (c *Client) TxManagerSubmit(txHex string) (string, error) {
 	resp, err := c.postBuffer(url, txBuffer)
 	if err != nil {
 		return "", err
+	}
+	if resp == nil {
+		return "", fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
 		return "", fmt.Errorf("unexpected error: %d", resp.Body)
@@ -60,6 +66,9 @@ func (c *Client) TxManagerSubmitTurbo(txHex string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	if resp == nil {
+		return "", fmt.Errorf("empty response")
+	}
 	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusAccepted {
 		return "", fmt.Errorf("unexpected error: %d", resp.Body)
 	}
@@ -77,6 +86,9 @@ func (c *Client) TxManagerState(txHash string) (*models.TxManagerState, error) {
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
+	}
+	if resp == nil {
+		return nil, fmt.Errorf("empty response")
 	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)

@@ -51,6 +51,9 @@ func (c *Client) BlockInfo(blockHeight int64) (*BlockInfo, error) {
 	if err != nil {
 		return nil, err
 	}
+	if req == nil {
+		return nil, fmt.Errorf("empty request")
+	}
 
 	req.Header.Set("Content-Type", "application/json")
 
@@ -72,6 +75,9 @@ func (c *Client) LatestBlock() (*BlockInfo, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/blocks/latest", c.BaseUrl), nil)
 	if err != nil {
 		return nil, err
+	}
+	if req == nil {
+		return nil, fmt.Errorf("empty request")
 	}
 
 	req.Header.Set("Content-Type", "application/json")
