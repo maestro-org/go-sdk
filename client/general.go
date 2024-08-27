@@ -29,8 +29,8 @@ func (c *Client) ChainTip() (*models.ChainTip, error) {
 	return &chainTip, nil
 }
 
-func (c *Client) EraHistory() (*models.EraHistory, error) {
-	url := "/era-history"
+func (c *Client) EraSummaries() (*models.EraSummaries, error) {
+	url := "/era-summaries"
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err
@@ -42,16 +42,16 @@ func (c *Client) EraHistory() (*models.EraHistory, error) {
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
-	var eraHistory models.EraHistory
-	err = json.NewDecoder(resp.Body).Decode(&eraHistory)
+	var eraSummaries models.EraSummaries
+	err = json.NewDecoder(resp.Body).Decode(&eraSummaries)
 	if err != nil {
 		return nil, err
 	}
-	return &eraHistory, nil
+	return &eraSummaries, nil
 }
 
 func (c *Client) ProtocolParameters() (*models.ProtocolParameters, error) {
-	url := "/protocol-params"
+	url := "/protocol-parameters"
 	resp, err := c.get(url)
 	if err != nil {
 		return nil, err

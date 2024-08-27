@@ -31,7 +31,7 @@ type Era struct {
 	Start      EraTimeStamp `json:"start"`
 }
 
-type EraHistory struct {
+type EraSummaries struct {
 	Data        []Era             `json:"data"`
 	LastUpdated utils.LastUpdated `json:"last_updated"`
 }
