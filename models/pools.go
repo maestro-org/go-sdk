@@ -29,7 +29,6 @@ type PoolMintedBlocks struct {
 }
 
 type StakePoolDelegator struct {
-	ActiveEpochNo          int64  `json:"active_epoch_no"`
 	Amount                 string `json:"amount"`
 	LatestDelegationTxHash string `json:"latest_delegation_tx_hash"`
 	StakeAddress           string `json:"stake_address"`
@@ -69,7 +68,6 @@ type Relay struct {
 }
 
 type StakePoolDetails struct {
-	ActiveEpochNo  int64    `json:"active_epoch_no"`
 	ActiveStake    int64    `json:"active_stake"`
 	BlockCount     int64    `json:"block_count"`
 	FixedCost      int64    `json:"fixed_cost"`
