@@ -2,10 +2,6 @@ package models
 
 import "github.com/maestro-org/go-sdk/utils"
 
-type AdaAmount struct {
-	Lovelace int64 `json:"lovelace"`
-}
-
 type BytesSize struct {
 	Bytes int64 `json:"bytes"`
 }
@@ -74,6 +70,10 @@ type ProtocolVersion struct {
 type StringExUnits struct {
 	Memory string `json:"memory"`
 	Steps  string `json:"steps"`
+}
+
+type AdaAmount struct {
+	LovelaceAmount LovelaceAmount `json:"ada"`
 }
 
 type ProtocolParams struct {
