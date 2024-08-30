@@ -2,10 +2,8 @@ package models
 
 import "github.com/maestro-org/go-sdk/utils"
 
-type ChainTipData struct {
-	BlockHash string `json:"block_hash"`
-	Height    int64  `json:"height"`
-	Slot      int64  `json:"slot"`
+type BytesSize struct {
+	Bytes int64 `json:"bytes"`
 }
 
 type ChainTip struct {
@@ -13,16 +11,10 @@ type ChainTip struct {
 	LastUpdated utils.LastUpdated `json:"last_updated"`
 }
 
-type EraTimeStamp struct {
-	Epoch int64 `json:"epoch"`
-	Slot  int64 `json:"slot"`
-	Time  int64 `json:"time"`
-}
-
-type EraParams struct {
-	EpochLength int64 `json:"epoch_length"`
-	SafeZone    int64 `json:"safe_zone"`
-	SlotLength  int64 `json:"slot_length"`
+type ChainTipData struct {
+	BlockHash string `json:"block_hash"`
+	Height    int64  `json:"height"`
+	Slot      int64  `json:"slot"`
 }
 
 type Era struct {
@@ -31,14 +23,29 @@ type Era struct {
 	Start      EraTimeStamp `json:"start"`
 }
 
-type EraHistory struct {
+type EraParams struct {
+	EpochLength int64         `json:"epoch_length"`
+	SafeZone    int64         `json:"safe_zone"`
+	SlotLength  EraSlotLength `json:"slot_length"`
+}
+
+type EraSummaries struct {
 	Data        []Era             `json:"data"`
 	LastUpdated utils.LastUpdated `json:"last_updated"`
 }
 
-type ProtocolParameters struct {
-	Data        ProtocolParams    `json:"data"`
-	LastUpdated utils.LastUpdated `json:"last_updated"`
+type EraSlotLength struct {
+	Milliseconds int64 `json:"milliseconds"`
+}
+
+type EraTime struct {
+	Seconds int64 `json:"seconds"`
+}
+
+type EraTimeStamp struct {
+	Epoch int64   `json:"epoch"`
+	Slot  int64   `json:"slot"`
+	Time  EraTime `json:"time"`
 }
 
 type ExUnits struct {
@@ -46,9 +53,13 @@ type ExUnits struct {
 	Steps  int64 `json:"steps"`
 }
 
-type StringExUnits struct {
-	Memory string `json:"memory"`
-	Steps  string `json:"steps"`
+type LovelaceAmount struct {
+	Lovelace int64 `json:"lovelace"`
+}
+
+type ProtocolParameters struct {
+	Data        ProtocolParams    `json:"data"`
+	LastUpdated utils.LastUpdated `json:"last_updated"`
 }
 
 type ProtocolVersion struct {
@@ -56,27 +67,37 @@ type ProtocolVersion struct {
 	Minor int64 `json:"minor"`
 }
 
+type StringExUnits struct {
+	Memory string `json:"memory"`
+	Steps  string `json:"steps"`
+}
+
+type AdaAmount struct {
+	LovelaceAmount LovelaceAmount `json:"ada"`
+}
+
 type ProtocolParams struct {
-	CoinsPerUtxoByte                int64           `json:"coins_per_utxo_byte"`
 	CollateralPercentage            int64           `json:"collateral_percentage"`
-	CostModels                      any             `json:"cost_models"`
-	DesiredNumberOfPools            int64           `json:"desired_number_of_pools"`
-	MaxBlockBodySize                int64           `json:"max_block_body_size"`
-	MaxBlockHeaderSize              int64           `json:"max_block_header_size"`
+	DesiredNumberOfStakePools       int64           `json:"desired_number_of_stake_pools"`
+	MaxBlockBodySize                BytesSize       `json:"max_block_body_size"`
+	MaxBlockHeaderSize              BytesSize       `json:"max_block_header_size"`
 	MaxCollateralInputs             int64           `json:"max_collateral_inputs"`
 	MaxExecutionUnitsPerBlock       ExUnits         `json:"max_execution_units_per_block"`
 	MaxExecutionUnitsPerTransaction ExUnits         `json:"max_execution_units_per_transaction"`
-	MaxTxSize                       int64           `json:"max_tx_size"`
-	MaxValueSize                    int64           `json:"max_value_size"`
+	MaxTransactionSize              BytesSize       `json:"max_transaction_size"`
+	MaxValueSize                    BytesSize       `json:"max_value_size"`
 	MinFeeCoefficient               int64           `json:"min_fee_coefficient"`
-	MinFeeConstant                  int64           `json:"min_fee_constant"`
-	MinPoolCost                     int64           `json:"min_pool_cost"`
+	MinFeeConstant                  AdaAmount       `json:"min_fee_constant"`
+	MinStakePoolCost                AdaAmount       `json:"min_stake_pool_cost"`
+	MinUtxoDepositCoefficient       int64           `json:"min_utxo_deposit_coefficient"`
+	MinUtxoDepositConstant          AdaAmount       `json:"min_utxo_deposit_constant"`
 	MonetaryExpansion               string          `json:"monetary_expansion"`
-	PoolDeposit                     int64           `json:"pool_deposit"`
-	PoolInfluence                   string          `json:"pool_influence"`
-	PoolRetirementEpochBound        int64           `json:"pool_retirement_epoch_bound"`
-	Prices                          StringExUnits   `json:"prices"`
-	ProtocolVersion                 ProtocolVersion `json:"protocol_version"`
-	StakeKeyDeposit                 int64           `json:"stake_key_deposit"`
+	PlutusCostModels                any             `json:"plutus_cost_models"`
+	ProtocolVersion                 ProtocolVersion `json:"version"`
+	ScriptExecutionPrices           StringExUnits   `json:"script_execution_prices"`
+	StakeCredentialDeposit          AdaAmount       `json:"stake_credential_deposit"`
+	StakePoolDeposit                AdaAmount       `json:"stake_pool_deposit"`
+	StakePoolPledgeInfluence        string          `json:"stake_pool_pledge_influence"`
+	StakePoolRetirementEpochBound   int64           `json:"stake_pool_retirement_epoch_bound"`
 	TreasuryExpansion               string          `json:"treasury_expansion"`
 }

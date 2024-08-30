@@ -7,6 +7,7 @@ type ScriptVersion string
 const (
 	PlutusV1 ScriptVersion = "plutusv1"
 	PlutusV2 ScriptVersion = "plutusv2"
+	PlutusV3 ScriptVersion = "plutusv3"
 )
 
 type Script struct {
