@@ -10,7 +10,7 @@
     <a href="https://github.com/maestro-org/go-sdk/blob/main/LICENSE">
       <img src="https://img.shields.io/github/license/maestro-org/go-sdk?style=flat-square&label=License" />
     </a>
-    <a href="https://github.com/maestro-org/haskell-sdk/actions/workflows/build.yml?query=branch%3Amain">
+    <a href="https://github.com/maestro-org/go-sdk/actions/workflows/main.yml?query=branch%3Amain">
       <img src="https://img.shields.io/github/actions/workflow/status/maestro-org/go-sdk/main.yml?style=flat-square&branch=main&label=Build" />
     </a>
     <a href="./CONTRIBUTING.md">
