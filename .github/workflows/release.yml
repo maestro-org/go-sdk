@@ -23,10 +23,10 @@ jobs:
         - name: Test
           run: make test
         - name: Run GoReleaser
-          uses: goreleaser/goreleaser-action@master
+          uses: goreleaser/goreleaser-action@v6
           with:
             version: latest
-            args: release --rm-dist
+            args: release --clean
           env:
             GITHUB_TOKEN: ${{ secrets.GO_RELEASER_TOKEN }}
         - name: Publish doc to go.dev packages
