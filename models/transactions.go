@@ -92,8 +92,8 @@ type EvaluateTx struct {
 }
 
 type ExecutionUnits struct {
-	Mem   int64 `json:"Mem"`
-	Steps int64 `json:"Steps"`
+	Mem   int64 `json:"mem"`
+	Steps int64 `json:"steps"`
 }
 
 type RedeemerEvaluation struct {

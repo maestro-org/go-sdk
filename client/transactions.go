@@ -159,7 +159,7 @@ func (c *Client) TransactionOutputsFromReferences(
 func (c *Client) EvaluateTx(
 	txCbor string,
 	AdditionalUtxos ...string,
-) ([]models.RedeemerEvaluation, error) {
+) (models.EvaluateTxResponse, error) {
 	url := "/transactions/evaluate"
 	body := models.EvaluateTx{
 		Cbor:            txCbor,
@@ -176,7 +176,7 @@ func (c *Client) EvaluateTx(
 		return nil, fmt.Errorf("unexpected error: %d", resp.Body)
 	}
 	defer resp.Body.Close()
-	var redeemerEvals []models.RedeemerEvaluation
+	var redeemerEvals models.EvaluateTxResponse
 	err = json.NewDecoder(resp.Body).Decode(&redeemerEvals)
 	if err != nil {
 		return nil, err
